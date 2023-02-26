@@ -1,0 +1,93 @@
+new {
+  "courseTemplate": "video",
+  "courseId": "eh1",
+  "courseTitle": "erste hilfe",
+  "courseImage": "course image",
+  "departments": [
+    "dep1",
+    "dep2"
+  ],
+  "instructions": [
+    {
+      "title": "",
+      "subTitle": "",
+      "logo": "",
+      "instructionBlocks": [
+        {
+          "headline": "",
+          "instructionBlockItems": [
+            {
+              "image": "item img",
+              "text": "item tex"
+            },
+            {
+              "image": "item img2",
+              "text": "item text 2"
+            }
+          ],
+          "image": "block im",
+          "text": "block text"
+        }
+      ],
+      "instruction": "instr1",
+      "color": "colo",
+      "image": "img"
+    }
+  ],
+  "video": {
+    "autoplay": false,
+    "controls": true,
+    "fluid": true,
+    "responsive": true,
+    "preload": "auto",
+    "poster": "https://.../poster.jpg",
+    "sources": [
+      {
+        "src": "https://.../film.mp4",
+        "type": "video/mp4"
+      }
+    ],
+    "controlBar": {
+      "playToggle": true,
+      "captionsButton": false,
+      "chaptersButton": false,
+      "subtitlesButton": false,
+      "remainingTimeDisplay": true,
+      "progressControl": {
+        "seekBar": true
+      },
+      "fullscreenToggle": true,
+      "playbackRateMenuButton": true
+    }
+  },
+  "questions": [
+    {
+      "questionId": "q1",
+      "image": "https://.../img.jpg",
+      "question": "frage",
+      "answers": [
+        {
+          "image": "https://.../img.jpg",
+          "text": "text0"
+        },
+        {
+          "image": "",
+          "text": "antwort2"
+        }
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "answers": [
+        {
+          "image": "https://.../img.jpg",
+          "text": ""
+        }
+      ],
+      "questionId": "q2",
+      "question": "frage2",
+      "image": "bild2",
+      "correctAnswer": "correcta1"
+    }
+  ]
+}
