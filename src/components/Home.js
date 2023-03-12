@@ -6,11 +6,10 @@ export const Home = () => {
   const { currentUser } = useAuth()
   console.log('currentuser', currentUser)
   return (
-    <article className="prose">
-      <h2>Home</h2>
-      <p>
-        if parse error 209 logou  
-      </p>
-    </article>
+    <div className="bg-info ">
+
+      Home
+      if parse error 209 logou
+    </div>
   );
 };

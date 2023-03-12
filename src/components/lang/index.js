@@ -1,6 +1,6 @@
 export const de = {
   APP_TITLE: 'App Name',
-  NEW: 'neue',
+  NEW: 'neu',
   CREATE: 'anlegen',
   CREATED: 'angelegt!',
   DELETE: 'löschen',
@@ -30,7 +30,6 @@ export const de = {
   DEPARTMENT_NEW: 'Neue Abteilung',
   DEPARTMENT_NAME: 'Bezeichnung der Abteilung',
   COURSE: 'Schulung',
-  COURSES: 'Schulungen',
   COURSE_TITLE: 'Schulungs-Name',
 
 } 
@@ -67,6 +66,5 @@ export const en = {
   DEPARTMENT_NEW: 'New Department',
   DEPARTMENT_NAME: 'Name of the Department',
   COURSE: 'Training',
-  COURSES: 'Trainings',
   COURSE_TITLE: 'Title of Training',
 }

@@ -1,5 +1,5 @@
 export const jsonCourseTemplate = {
-  courseTemplate: '', // video or instruction 
+  courseTemplate: 'video', // video or instruction 
   courseId: "",
   courseTitle:"",
   courseImage: "",

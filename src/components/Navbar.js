@@ -15,45 +15,61 @@ export const Navbar = () => {
   }
 
   return (
-    <>
-      <div className='bg-primary'>
-        <div className='container mx-auto py-5 flex justify-between'>
 
-          <Link to='/'>{lang.APP_TITLE}</Link>
-          <SelectField dataArr={['DE','EN']} onChange={onChangehandler} />
-          <span> 
-            {currentUser ? 'Hallo' : ""} {currentUser?.attributes?.username  || currentUser?.attributes?.email}
-          </span>
+<div className="navbar bg-base-100">
+  <div className="flex-1">
+    <Link className="btn btn-ghost normal-case text-xl px-3" to='/'>{lang.APP_TITLE}</Link>
+  </div>
+  <div className="flex-none">
+    <SelectField
+      dataArr={['DE','EN']}
+      onChange={onChangehandler}  
+    />   
+  </div> 
+  <div className="flex-none">
+    <ul className="menu menu-horizontal px-1">
+      <li>
+        <div className='h-20'> 
+          {currentUser ? 'Hallo' : ""} {currentUser?.attributes?.username  || currentUser?.attributes?.email}
 
-          {
-            currentUser
-            ?
-            <div> 
-              <Link to='/courses'> {lang.COURSE} </Link> {' | '}
-              <UserLogout />
-            </div>
-            :
-            <div>
-              <Link to='/login'>{lang.LOGIN_TITLE}</Link> {' | '}
-              <Link to="/signup"> {lang.REGISTER_TITLE} </Link>
-            </div>
-          }
         </div>
-      </div>
+      </li>
       {
-        (currentUser && currentUser?.attributes?.role === 'admin')
-        ? 
-        <div className='bg-base-300 '>
-          <div className='container mx-auto py-3'>
-            {/* <Link to='/admin/department'> {lang.DEPARTMENT} </Link> {' | '} */}
-            <Link to='/admin/courses'> {lang.COURSES} </Link> {' | '}
-            <Link to={`/admin/courses/new`}>{lang.NEW + ' ' + lang.COURSE}</Link>
-          </div>
-        </div> 
-        :   
-        ''
+      (currentUser && currentUser?.attributes?.role === 'admin')
+      ? 
+      <li tabIndex={0}>
+        <a href='/#'>
+          Admin
+          <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
+        </a>
+        <ul className="p-2 bg-base-100">
+          <li>
+            <Link to='/admin/department'> {lang.DEPARTMENT} </Link>
+          </li>
+          <li>
+            <Link to='/admin/courses'> admin {lang.COURSE} </Link> 
+          </li>
+        </ul>
+      </li>
+      :
+      ""
       }
-    </>
-  );
-};
+      
+      {
+        currentUser
+        ?
+        <li> 
+          <Link to='/courses'> {lang.COURSE} </Link> 
+          <UserLogout />
+        </li>
+        :
+        <li>
+          <Link to='/login'>{lang.LOGIN_TITLE}</Link>
+          <Link to="/signup"> {lang.REGISTER_TITLE} </Link>
+        </li>
+      }
+    </ul>
+  </div>
+</div>
  
+)}

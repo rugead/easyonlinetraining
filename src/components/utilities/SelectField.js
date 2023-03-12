@@ -7,7 +7,7 @@ export const SelectField = (props) => {
     <select
       value={value}
       onChange={onChange}
-      className="select select-ghost select-bordered"
+      className="p-1 bg-gray-100 w-20 text-gray-800 rounded-md"
     >
       {dataArr.map((item, index) => {
         return (

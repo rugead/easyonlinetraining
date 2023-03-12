@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Parse } from 'parse';
 import { de, en} from './components/lang'
-// import { } from 'react-router-dom';
+
 const AuthContext = createContext(null)
 
 export const AuthProvider = ({children}) => {
@@ -17,8 +17,14 @@ export const AuthProvider = ({children}) => {
     return currentUser;
   };
 
+  // const getLang = async function () {
+  //   // const currentLang = await Parse.User.current();
+  //   // Update state variable holding current user
+  //   setLang(currentUser);
+  //   return currentUser;
+  // };
+
   const doUserLogIn = async function (username, password) {
-    console.log('username: ', username);    
     // Note that these values come from state variables that we've declared before
     const usernameValue = username;
     const passwordValue = password;
@@ -34,6 +40,7 @@ export const AuthProvider = ({children}) => {
       // Clear input fields
       // setUsername('');
       // setPassword('');
+      // Update state variable holding current user
       getCurrentUser();
       return true;
     } catch (error) {
@@ -50,11 +57,10 @@ export const AuthProvider = ({children}) => {
       const currentUser = await Parse.User.current();
       if (currentUser === null) {
         alert('Success! No user is logged in anymore!');
-        // redirect('/login');
       }
       // Update state variable holding current user
       getCurrentUser();
-      return true
+      return true;
     } catch (error) {
       alert(`Error! ${error.message}`);
       return false;
@@ -71,6 +77,7 @@ export const AuthProvider = ({children}) => {
     en,
   }
 
+
   return (  
     <AuthContext.Provider value={value}>
       {children}
@@ -81,3 +88,5 @@ export const AuthProvider = ({children}) => {
 export const useAuth = () => {
   return useContext(AuthContext)
 }
+ 
+// export default AuthProvider;

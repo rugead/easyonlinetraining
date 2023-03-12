@@ -4,7 +4,7 @@ export const Button = (props) => {
   const { name, onClick, label, type } = props
   return ( 
     <button 
-      className="p-2 text-primary hover:text-gray-200 hover:bg-primary border border-primary rounded-md" 
+      className="btn btn-primary" 
       type={type || "button"}
       name={name} 
       onClick={onClick} 
@@ -17,7 +17,7 @@ export const Button = (props) => {
 export const PrevButton = (props) => {  
   return(
     <div
-      className="m-1 p-1 flex flex-1 justify-start text-primary hover:bg-primary mt-5  border border-primary cursor-pointer hover:text-gray-100 rounded-md" 
+      className="btn btn-primary" 
       onClick={()=> props.action()}
     >
       <svg xmlns="htt
@@ -30,7 +30,7 @@ export const PrevButton = (props) => {
 export const NextButton = (props) => {  
   return(
     <div
-      className="m-1 p-1 flex  flex-1 justify-end text-primary hover:bg-primary mt-5  border border-primary cursor-pointer hover:text-gray-100 rounded-md" 
+      className="btn btn-primary" 
       onClick={()=> props.action()}
     >
       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6  justify-center align-self-center" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { H3 } from '../../utilities/Headline';
 import no from '../../../img/no.jpg'
 import { PrevButton, NextButton } from '../../utilities/Button';
 import { QuizArea, ScoreArea } from './QuizFunctions';
@@ -20,10 +21,11 @@ export const QuestionShow = ({questions}) => {
     let correct = 0 
     let incorrect = 0
 
-    Object.entries(clickedAnswers).map(([value]) => {
+    Object.entries(clickedAnswers).map(([key, value]) => {
       if (value.c === value.d) { correct += 1 }
       if (value.c !== value.d) { incorrect += 1 }
-      return true
+      // const corr = value.c === value.d ? true : false
+      // return corr
     })
 
     setCorrectScore(correct)

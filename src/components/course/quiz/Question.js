@@ -1,5 +1,7 @@
 import React, { useCallback } from "react";
+import { Button } from "../../utilities/Button";
 import { DivRow, DivCol } from "../../utilities/Div";
+import { TextField } from "../../utilities/TextField";
 import { useFieldArray } from "react-hook-form";
 import { H3} from "../../utilities/Headline"
 import { Answer } from "./Answer"
@@ -26,14 +28,16 @@ export const Question = ({ register, control, handleSubmit, reset, trigger, setE
   return (
     <fieldset>
       <H3>Frage {questionIndex}</H3>
-      <div className="flex" >
-          <input className="input " register={`${fieldName}.questionId`} label='questionId'  defaultValue={`q${questionIndex}`} hidden />
-          <input className="input w-full max-w-xs" register={`${fieldName}.question`} label='Frage' placeholder='question' />
-          <input className="input " register={`${fieldName}.correctAnswer`} label='correctAnswer' placeholder='correctAnswer' />
-      </div>
-      <DivRow>
-          <input className="input w-full max-w-xs" register={`${fieldName}.image`} label='Image' placeholder='Bild' />
-          <button className="btn" onClick={handleDelete}>delete</button>
+      <DivRow >
+        <DivCol>
+          <TextField register={register} name={`${fieldName}.questionId`} label='questionId'  defaultValue={`que${questionIndex}`} />
+          <TextField register={register} name={`${fieldName}.question`} label='Frage' placeholder='question' />
+          <TextField register={register} name={`${fieldName}.image`} label='Image' placeholder='Bild' />
+          <TextField register={register} name={`${fieldName}.correctAnswer`} label='correctAnswer' placeholder='correctAnswer' />
+        </DivCol>
+        <DivCol>
+          <Button label="delete" onClick={handleDelete} />
+        </DivCol>
       </DivRow>
       <DivRow>
         <DivCol>
@@ -47,7 +51,7 @@ export const Question = ({ register, control, handleSubmit, reset, trigger, setE
               remove={removeAnswer}
             />
           ))}
-          <button className="btn" label="add answer" onClick={() => appendAnswer({})} />
+          <Button label="add answer" onClick={() => appendAnswer({})} />
         </DivCol>
       </DivRow>
     </fieldset>

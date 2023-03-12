@@ -11,7 +11,6 @@ export function CourseAdmin() {
   })
   
   return (
-    <div className="">
       <div>
         {results && results.map((object, index) => {
           return (
@@ -24,6 +23,5 @@ export function CourseAdmin() {
         })}
       </div>
      
-    </div>
   );
 }

@@ -29,15 +29,9 @@ export const Person = () => {
   return (
 
     <div>
-          {isLoading && (
-            <p>Loading...</p>
-            )}
-          {isLive && (
-            <p>Live!</p>
-            )}
-          {isSyncing && (
-            <p>Syncing...</p>
-            )}
+          {isLoading && ( <p>Loading...</p>  )}
+          {isLive && ( <p>Live!</p>   )}
+          {isSyncing && ( <p>Syncing...</p> )}
           {results && (
             <ul>
               {results.map(result => (
@@ -47,11 +41,11 @@ export const Person = () => {
               ))}
             </ul>
           )}
-          <p>{count}</p>
-          {error && (
-            <p>{error.message}</p>
-            )}
-          <button
+            <p>{count}</p>
+            {error && (
+              <p>{error.message}</p>
+              )}
+            <button
             onClick={reload}
           >
             Reload

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+// import Parse from 'parse/dist/parse.min.js';
 import { Navigate } from 'react-router-dom';
 import Parse from "parse";
+import { InputField } from '../utilities/InputField';
+import { Button } from '../utilities/Button';
+import { H2 } from '../utilities/Headline';
 import { useAuth } from '../../AuthProvider'
 
 export const UserRegistration = () => {
@@ -100,86 +104,95 @@ export const UserRegistration = () => {
   };
 
   return (
-    <form className=' mx-auto max-w-md '>
+    <div>
       {currentUser && <Navigate replace to="/verify-email/" />}
 
-      <div className="prose">
-        <h2>{lang.REGISTER_TITLE}</h2>
-      </div>
+      <div className="container">
+        <H2>{lang.REGISTER_TITLE}</H2>
+        <div className="">
 
-      <div className="form-control w-full max-w-xs">
-
-        <label htmlFor="displayName" className="label">
-          <span className="label-text">{lang.FIRSTNAME}</span>
-        </label>
-        <input
-            className="input input-bordered w-full max-w-xs"
+        {/* <InputField
+            label={lang.USERNAME}
+            type="text"
+            name="username"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+            placeholder={lang.USERNAME}
+          /> */}
+          
+          <InputField
+            label={lang.FIRSTNAME}
             type="text"
             name="firstname"
+            value={firstname}
             onChange={(event) => setFirstname(event.target.value)}
             placeholder={lang.FIRSTNAME}
-        />
-        
-        <label htmlFor="displayName" className="label">
-          <span className="label-text">{lang.LASTNAME}</span>
-        </label>
-        <input
-            className="input input-bordered w-full max-w-xs"
+          />
+          
+          <InputField
+            label={lang.LASTNAME}
             type="text"
             name="lastname"
+            value={lastname}
             onChange={(event) => setLastname(event.target.value)}
             placeholder={lang.LASTNAME}
-        />
-        
-        <label htmlFor="displayName" className="label">
-          <span className="label-text">{lang.EMAIL}</span>
-        </label>
-        <input
-            className="input input-bordered w-full max-w-xs"
+          />
+
+          <InputField
+            label={lang.EMAIL}
             type="email"
             name="email"
+            value={email}
             onChange={(event) => setEmail(event.target.value)}
             placeholder={lang.EMAIL}
-        />
-        <label htmlFor="displayName" className="label">
-          <span className="label-text">{lang.PERSONAL_NUMBER}</span>
-        </label>
-        <input
-            className="input input-bordered w-full max-w-xs"
+          />
+          
+          <InputField
+            label={lang.PERSONAL_NUMBER}
             type="text"
-            name="empoyeeId"
+            name="employeeId"            
+            value={employeeId}
             onChange={(event) => setEmployeeId(event.target.value)}
             placeholder={lang.PERSONAL_NUMBER}
-        />
-        <label htmlFor="displayName" className="label">
-          <span className="label-text">{lang.PASSWORD}</span>
-        </label>
-        <input
-            className="input input-bordered w-full max-w-xs"
+          />
+
+          {/* <InputField
+            label={lang.DEPARTMENT}
+            type="text"
+            name="department"          
+            value={department}
+            onChange={(event) => setDepartment(event.target.value)}
+            placeholder={lang.DEPARTMENT}
+          /> */}
+
+          <InputField
+            label={lang.PASSWORD}
             type="password"
             name="password"
+            value={password}
             onChange={(event) => setPassword(event.target.value)}
             placeholder={lang.PASSWORD}
-        />
-
-        <label htmlFor="displayName" className="label">
-          <span className="label-text">{lang.PASSWORD_CONFIRM}</span>
-        </label>
-        <input
-            className="input input-bordered w-full max-w-xs"
+          />
+          <InputField
+            label={lang.PASSWORD_CONFIRM}
             type="password"
             name="passwordConfirm"
+            value={passwordConfirm}
             onChange={(event) => setPasswordConfirm(event.target.value)}
             placeholder={lang.PASSWORD_CONFIRM}
-        />
+          />
 
-        <button
-          className='btn btn-outline mt-8'
-          onClick={() => doUserRegistration()}
-          type="button">
-            {lang.REGISTER}
-        </button>
+
+        </div>
+        <div className="pt-2">
+
+          <Button
+            onClick={() => doUserRegistration()}
+            type="submit"
+            label={lang.REGISTER}
+            />
+        </div>
       </div>
-    </form>
+    </div>
   );
 };

@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, {useMemo} from 'react';
 import Parse from "parse";
 import { useAuth } from '../../AuthProvider';
 import { useParseQuery } from "@parse/react";
@@ -11,7 +11,7 @@ import { DeleteDepartment } from './DeleteDepartment'
 export const ListDepartments = () => {
   const { lang } = useAuth()
   const parseQuery = new Parse.Query('Department');
-  const { results, } = useParseQuery(parseQuery, {
+  const { isLive, isLoading, isSyncing, results, count, error, reload } = useParseQuery(parseQuery, {
     enableLocalDatastore: true, // Enables cache in local datastore (default: true)
     enableLiveQuery: true, // Enables live query for real-time update (default: true)
   });

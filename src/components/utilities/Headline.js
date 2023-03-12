@@ -2,17 +2,21 @@ import React from 'react';
 
 export const H1 = ({children}) => {
   return ( 
-    <h1 className="p-2 text-4xl sm:text-5xl md:text-6xl lg:text-8xl xl:text-9xl text-gray-500">
+    <div className='prose'>
+   <h1 className="">
       {children}
     </h1>
+    </div>
    );
 }
 
 export const H2 = ({children}) => {
   return ( 
-    <h2 className="p-2 text-3xl md:text-3xl lg:text-4xl xl:text-5xl text-gray-500">
-      {children}
-    </h2>
+    <div className='prose'>
+      <h2 className="">
+        {children}
+      </h2>
+    </div>
    );
 }
 

@@ -1,10 +1,13 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+// import { useAuth } from "../AuthProvider";
 
-export const Admin = () => { 
+export const Admin = () => {
+  // const { currentUser } = useAuth()
+  
   return (
-    <div className='w-full p-5'>
-       <Outlet />
+    <div className="w-full"> 
+      <Outlet />
     </div>
   );
 };

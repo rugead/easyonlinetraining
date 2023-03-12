@@ -1,11 +1,25 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { Button } from "../../utilities/Button";
+import { DivRow, DivCol } from "../../utilities/Div";
+import { TextField } from "../../utilities/TextField";
 import { useFieldArray } from "react-hook-form";
+import { H3} from "../../utilities/Headline"
 import { InstructionBlock } from "./InstructionBlock"
+import { BgColors, BgColorsInput } from "../../utilities/Colors";
+import { ColorField } from "../../utilities/ColorField"
+import { InputField } from "../../utilities/InputField";
 
-export const Instruction = ({ register, control, handleSubmit, reset, trigger, setError, defaultValues, getValues, setValue, errors, instructionIndex, remove }) => {
+
+export const Instruction = ({ register, control, handleSubmit, reset, trigger, setError, defaultValues, getValues, setValue, errors, instructionIndex, remove, instruction }) => {
+  const [color, setColor] = useState(instruction?.color)
+  console.log('defaultValues?.color: ', instruction);
+  
   const fieldName = `instructions.${instructionIndex}`;
-
+  const onClick = (ev) => {
+    ev.preventDefault()
+    console.log('ev.target.dataset.color: ', ev.target.dataset.color);
+    setColor(ev.target.dataset.color)
+  }
   const {
     remove: removeInstructionBlock,
     append: appendInstructionBlock,
@@ -21,36 +35,32 @@ export const Instruction = ({ register, control, handleSubmit, reset, trigger, s
   ]);
 
   return (
-  <>
-   <fieldset className="card bg-base-100 shadow-xl my-5 p-5">
-      <div className="prose p-2">
-        <h3>Anweisung {instructionIndex + 1}</h3>
-      </div>
+    <fieldset>
+      
+      <H3>Anweisung {instructionIndex}</H3>
+      <div className={`bg-${instruction.color} text-content-${instruction.color}`}>
+        <DivCol>
+          <TextField register={register} name={`${fieldName}.instruction`} label='Instruction' placeholder='Instruction' />
+          {/* <input className="input" {...register(`${fieldName}.color`)} label='Color' value={color} readOnly/> */}
+          {/* <ColorField register={register} name={`${fieldName}.color`} xxx={color} /> */}
 
-      <div className="flex">
-        <div className="form-control flex-grow p-1">
-          <label className="label"><span className="label-text">Titel der Anweisung</span></label>
-          <input {...register(`${fieldName}.title`)} className="input input-md input-bordered flex-grow" placeholder='Title' />
+        <div className={`bg-error w-10 `}>
+          <input className={`bg-error w-10 `} {...register(`${fieldName}.color`)} type="radio" value="error"   label='Color'/>
         </div>
-        <div className="form-control flex-grow p-1">
-          <label className="label"><span className="label-text">Subtitel der Anweisung</span></label>
-          <input {...register(`${fieldName}.subTitle`)} className="input input-md input-bordered flex-grow" placeholder='Subtitle ' />
+        <div className={`bg-warning w-10 `}>
+          <input className={`bg-warning w-10 `} {...register(`${fieldName}.color`)} type="radio" value="warning" />
         </div>
-        <div className="form-control w-max-xs p-1">  
-          <label className="label"><span className="label-text">Farbe der Anweisung</span></label>
-          <input {...register(`${fieldName}.color`)} className="input input-md input-bordered flex-1" placeholder='Color' />
+        <div className={`bg-success w-10 `} >
+          <input className={`bg-success w-10 `} {...register(`${fieldName}.color`)} type="radio" value="success" />
         </div>
-      </div>
-      <div className="flex"> 
-        <div className="form-control flex-grow p-1">    
-          <input {...register(`${fieldName}.image`)} className="input input-md input-bordered flex-grow"  placeholder='Bild' />
-        </div>
-        <div className="form-control  p-1">    
-          <button className="btn" onClick={handleDelete}> delete </button>
-        </div>
-      </div>
-
-        <div>
+        <TextField register={register} name={`${fieldName}.image`} label='Image' placeholder='Bild' />
+        </DivCol>
+        <DivCol>
+          <Button label="delete" onClick={handleDelete} />
+        </DivCol>
+        </div> 
+      <DivRow>
+        <DivCol>
           {instructionBlocks.map((instructionBlock, instructionBlockIndex) => (
             <InstructionBlock
               key={instructionBlock.id}
@@ -59,14 +69,13 @@ export const Instruction = ({ register, control, handleSubmit, reset, trigger, s
               instructionBlock={instructionBlock}
               {...{register, control, handleSubmit, reset, trigger, setError, defaultValues, getValues, setValue, errors}}
               remove={removeInstructionBlock}
-              />
-              ))}
+            />
+          ))}
 
         
           <Button label="add instructionBlock" onClick={() => appendInstructionBlock({})} />
-        </div>
+        </DivCol>
+      </DivRow>
     </fieldset>
-
-</>
-);
+  );
 };

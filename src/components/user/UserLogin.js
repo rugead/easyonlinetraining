@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from './../../AuthProvider';
 
+import { Button } from '../utilities/Button';
+import { H1  } from '../utilities/Headline';
+import { InputField } from '../utilities/InputField';
+
 
 export const UserLogin = () => {
   // State variables
@@ -10,48 +14,47 @@ export const UserLogin = () => {
   const {currentUser, doUserLogIn, lang} = useAuth()
 
   return (
-    <>
-    
-    <form className=' mx-auto max-w-md '>
-      <div className="prose">
-        <h2>{lang.LOGIN_TITLE}</h2>
-      </div>        
-        <div className="form-control w-full max-w-xs">
-          <label htmlFor="displayName" className="label">
-            <span className="label-text">{lang.USERNAME_OR_EMAIL}</span>
-          </label>
-          <input
-            className="input input-bordered w-full max-w-xs"
+    <div>
+      {currentUser && <Navigate replace to="/courses/" />}
+      <div className="">
+        <H1>{lang.LOGIN_TITLE}</H1>
+        <div className="">
+          <InputField
+            label={lang.USERNAME_OR_EMAIL}
             type="text"
             name="username"
+            value={username}
             onChange={(event) => setUsername(event.target.value)}
             placeholder={lang.USERNAME_OR_EMAIL}
-            />
-          
-          <label htmlFor="displayName" className="label">
-            <span className="label-text">{lang.PASSWORD}</span>
-          </label>
-          <input
-            className="input input-bordered w-full max-w-xs"
+          />
+          <InputField
+            label={lang.PASSWORD}
             type="password"
             name="password"
+            value={password}
             onChange={(event) => setPassword(event.target.value)}
             placeholder={lang.PASSWORD}
-            />
+          />
           
-          <button
-            className='btn btn-outline mt-8'
-            onClick={() => doUserLogIn(username, password)}
-            type="button">
-              {lang.LOGIN}
-          </button>
-          <label htmlFor="displayName" className="label">
-            <span className="label-text"> Don't have an account? </span>
-            <Link className="link link-hover" to="/signup"> {lang.REGISTER} </Link> 
-          </label>
+          <div className="pt-2"> 
+            <Button
+              onClick={() => doUserLogIn(username, password)}
+              type="submit"
+              label={lang.LOGIN}
+              />
+          </div>
+          
+          <div className="p-2 flex items-start">
+            <label className="p-2 flex-shrink w-60 ">
+              <span className=""> </span>
+            </label>
+            <div className="p-2 m-3 w-full" >
+                Don't have an account? 
+                <Link className="cursor-pointer text-blue-400" to="/signup"> {lang.REGISTER} </Link> 
+            </div> 
+          </div>
+        </div>
       </div>
-    </form>
-    {currentUser && <Navigate replace to="/courses/" />}
-    </>
+    </div>
   );
 };
