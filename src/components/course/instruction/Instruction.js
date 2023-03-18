@@ -5,21 +5,9 @@ import { TextField } from "../../utilities/TextField";
 import { useFieldArray } from "react-hook-form";
 import { H3} from "../../utilities/Headline"
 import { InstructionBlock } from "./InstructionBlock"
-import { BgColors, BgColorsInput } from "../../utilities/Colors";
-import { ColorField } from "../../utilities/ColorField"
-import { InputField } from "../../utilities/InputField";
-
 
 export const Instruction = ({ register, control, handleSubmit, reset, trigger, setError, defaultValues, getValues, setValue, errors, instructionIndex, remove, instruction }) => {
-  const [color, setColor] = useState(instruction?.color)
-  console.log('defaultValues?.color: ', instruction);
-  
   const fieldName = `instructions.${instructionIndex}`;
-  const onClick = (ev) => {
-    ev.preventDefault()
-    console.log('ev.target.dataset.color: ', ev.target.dataset.color);
-    setColor(ev.target.dataset.color)
-  }
   const {
     remove: removeInstructionBlock,
     append: appendInstructionBlock,
@@ -35,47 +23,46 @@ export const Instruction = ({ register, control, handleSubmit, reset, trigger, s
   ]);
 
   return (
-    <fieldset>
+    <fieldset className={``}>
       
-      <H3>Anweisung {instructionIndex}</H3>
-      <div className={`bg-${instruction.color} text-content-${instruction.color}`}>
-        <DivCol>
-          <TextField register={register} name={`${fieldName}.instruction`} label='Instruction' placeholder='Instruction' />
-          {/* <input className="input" {...register(`${fieldName}.color`)} label='Color' value={color} readOnly/> */}
-          {/* <ColorField register={register} name={`${fieldName}.color`} xxx={color} /> */}
+      <div className={`card card-bordered border-${instruction.color} shadow-xl`}>
+        <div className="card-body">
+          <h2 className="card-title">Anweisung {instructionIndex}</h2>
+          <div class="flex ">
+              <input className={`radio radio-error m-3`} {...register(`${fieldName}.color`)} type="radio" value="error"   label='Color'/>
+              <input className={`radio radio-warning m-3`} {...register(`${fieldName}.color`)} type="radio" value="warning" />
+              <input className={`radio radio-success m-3`} {...register(`${fieldName}.color`)} type="radio" value="success" />
+              <input className={`radio radio-accent m-3`} {...register(`${fieldName}.color`)} type="radio" value="accent" />
+              <input className={`radio radio-neutral m-3`} {...register(`${fieldName}.color`)} type="radio" value="neutral" />
+              <input className={`radio radio-info m-3`} {...register(`${fieldName}.color`)} type="radio" value="info" />
+              <input className={`radio radio-secondary m-3`} {...register(`${fieldName}.color`)} type="radio" value="secondary" />
+              <input className={`radio radio-primary m-3`} {...register(`${fieldName}.color`)} type="radio" value="primary" />
+          </div>
+          <div className="flex">
 
-        <div className={`bg-error w-10 `}>
-          <input className={`bg-error w-10 `} {...register(`${fieldName}.color`)} type="radio" value="error"   label='Color'/>
-        </div>
-        <div className={`bg-warning w-10 `}>
-          <input className={`bg-warning w-10 `} {...register(`${fieldName}.color`)} type="radio" value="warning" />
-        </div>
-        <div className={`bg-success w-10 `} >
-          <input className={`bg-success w-10 `} {...register(`${fieldName}.color`)} type="radio" value="success" />
-        </div>
-        <TextField register={register} name={`${fieldName}.image`} label='Image' placeholder='Bild' />
-        </DivCol>
-        <DivCol>
-          <Button label="delete" onClick={handleDelete} />
-        </DivCol>
-        </div> 
-      <DivRow>
-        <DivCol>
+            <input className={`input input-bordered w-full max-w-xs mx-3`} {...register(`${fieldName}.instruction`)} type="text" />
+            <input className={`input input-bordered w-full max-w-xs mx-3`} {...register(`${fieldName}.image`)} type="text" />     
+            <button className="btn" label="delete" onClick={handleDelete} >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+              </svg>
+           </button>
+          </div>
+        
           {instructionBlocks.map((instructionBlock, instructionBlockIndex) => (
             <InstructionBlock
-              key={instructionBlock.id}
-              instructionBlockIndex={instructionBlockIndex}
-              instructionIndex={instructionIndex}
-              instructionBlock={instructionBlock}
-              {...{register, control, handleSubmit, reset, trigger, setError, defaultValues, getValues, setValue, errors}}
-              remove={removeInstructionBlock}
+            key={instructionBlock.id}
+            instructionBlockIndex={instructionBlockIndex}
+            instructionIndex={instructionIndex}
+            instructionBlock={instructionBlock}
+            {...{register, control, handleSubmit, reset, trigger, setError, defaultValues, getValues, setValue, errors}}
+            remove={removeInstructionBlock}
             />
-          ))}
+            ))}
+          <button type="button"  className="btn btn-square btn-sm" onClick={() => appendInstructionBlock({})} > + </button>
 
-        
-          <Button label="add instructionBlock" onClick={() => appendInstructionBlock({})} />
-        </DivCol>
-      </DivRow>
+        </div>
+      </div> 
     </fieldset>
   );
 };
