@@ -119,58 +119,39 @@ export const CourseForm = ({course, objectId}) => {
       <Tab.Panels>
     
         <Tab.Panel>
-          {/* <DivRow>
-            <TextField register={register} name={`courseTemplate`} label={`courseTemplate`} placeholder={`courseTemplate`} />
-          </DivRow> */}
-          <DivRow>
-            <TextField register={register} name={`courseTitle`} label={`courseTitle`} placeholder={`courseTitle`} />
-          </DivRow>
-          <DivRow>
-            <TextField register={register} name={`courseImage`} label={`courseImage`} placeholder={`courseImage`} />
-          </DivRow>
-          {/* {departments.map((item, index) => {    
-            return (
-            <DivRow key={item.id}>
-              <Select  name={`departments.${index}`} />
-              <Button label="delete" onClick={() => removeDepartment(index)} />
-            </DivRow>
-            )} 
-            )
-          } */}
-
-
-          <select {...register("department")}>
-            <option key='0' value="">select</option>    
-            <option key='1' value="Verkauf">Verkauf</option>    
-            <option key='2' value="Produktion">Produktion</option>    
-          </select>
-
-          {/* <Button label="Add department" onClick={() => appendDepartment()} /> */}
+          <div className="flex gap-4 px-4">
+            <input placeholder="Course Title" className={`input input-bordered w-full`} {...register(`courseTitle`)} type="text" />
+            <input placeholder="Image http://domain.de/image.jpg"className={`input input-bordered w-full`} {...register(`courseImage`)} type="text" />     
+            <select {...register("department")} className="select select-bordered">
+              <option key='0' value="" disabled selected>select</option>    
+              <option key='1' value="Verkauf">Verkauf</option>    
+              <option key='2' value="Produktion">Produktion</option>    
+            </select>
+          </div>
         </Tab.Panel>
     
         <Tab.Panel>
-          <div className="flex flex-col p-5 gap-5">
-
-          {instructions.map((item, index) => {
-            console.log('item: ', item.color);
-            return (
-              <Instruction
-              {...{ control, register }}
-              key={item.id}
-              instruction={item}
-                instructionIndex={index}
-                onChange={'onChange'}
-                remove={removeInstruction}
+          <div className="flex flex-col p-3">
+            {instructions.map((item, index) => {
+              return (
+                <Instruction
+                  {...{ control, register }}
+                  key={item.id}
+                  instruction={item}
+                  instructionIndex={index}
+                  onChange={'onChange'}
+                  remove={removeInstruction}
                 />
-                );
-              })}
-          <Button label="Add Instruction" onClick={() => appendInstruction({ instructionBlocks: [] })} />
-              </div>
+              );
+            })}
+          </div>
+          <div className="p-4">
+            <button className="btn" type="button" onClick={() => appendInstruction({ instructionBlocks: [] })} >Add Instruction</button>
+          </div>
         </Tab.Panel>
           
         <Tab.Panel>
           {questions.map((item, index) => {
-            // console.log('item', index, item.questionId, item.question)
             return (
               <Question
                 {...{ control, register }}
@@ -191,12 +172,14 @@ export const CourseForm = ({course, objectId}) => {
       </Tab.Panels>
     </Tab.Group>
 
+    <div className="toast">
+      <div className="alert alert-warning">
+        <div>
+          <button className="btn hover:btn-warning" type="button" onClick={handleSubmit(onSubmit)} >save</button>
+        </div>
+      </div>
+    </div>
 
-
-    <DivRow>
-        {/* <Button label="reset" onClick={onReset} /> */}
-        <Button label="submit" onClick={handleSubmit(onSubmit)} type="submit" />
-    </DivRow>
 
     <div>
       <div> 
@@ -213,11 +196,11 @@ export const CourseForm = ({course, objectId}) => {
        })}
     </div>
 
-    <DivRow>
+    <div>
       <pre id="json">    
         {JSON.stringify(course, null , '\t')} 
       </pre>
-    </DivRow>
+    </div>
   </form>  
   );
 };
