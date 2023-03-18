@@ -26,7 +26,7 @@ export const InstructionBlock = ({ register, control, handleSubmit, reset, trigg
 
   return (
     <>
-      <h2 className="card-title">Anweisungsblock {instructionBlockIndex}</h2>
+      <h2 className="card-title">{instructionBlockIndex + 1 }. Anweisungsblock</h2>
       <div className="flex">
         <input className={`input input-bordered w-full max-w-xs mx-3`} {...register(`${fieldName}.image`)} type="text" />
         <input className={`input input-bordered w-full max-w-xs mx-3`} {...register(`${fieldName}.text`)} type="text" />
@@ -49,7 +49,8 @@ export const InstructionBlock = ({ register, control, handleSubmit, reset, trigg
 
               />
           ))}
-          <Button label="add instructionblockitem" onClick={() => appendInstructionBlockItem({})} />
+
+          <button type="button" className="btn" label="add" onClick={() => appendInstructionBlockItem({})} > add block item </button>
     </>
   );
 };

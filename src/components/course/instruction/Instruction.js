@@ -27,9 +27,9 @@ export const Instruction = ({ register, control, handleSubmit, reset, trigger, s
       
       <div className={`card card-bordered border-${instruction.color} shadow-xl`}>
         <div className="card-body">
-          <h2 className="card-title">Anweisung {instructionIndex}</h2>
+          <h2 className="card-title">{instructionIndex + 1}. Anweisung</h2>
           <div class="flex ">
-              <input className={`radio radio-error m-3`} {...register(`${fieldName}.color`)} type="radio" value="error"   label='Color'/>
+              <input className={`radio radio-error m-3`} {...register(`${fieldName}.color`)} type="radio" value="error" />
               <input className={`radio radio-warning m-3`} {...register(`${fieldName}.color`)} type="radio" value="warning" />
               <input className={`radio radio-success m-3`} {...register(`${fieldName}.color`)} type="radio" value="success" />
               <input className={`radio radio-accent m-3`} {...register(`${fieldName}.color`)} type="radio" value="accent" />
@@ -59,7 +59,7 @@ export const Instruction = ({ register, control, handleSubmit, reset, trigger, s
             remove={removeInstructionBlock}
             />
             ))}
-          <button type="button"  className="btn btn-square btn-sm" onClick={() => appendInstructionBlock({})} > + </button>
+          <button type="button" className="btn btn-sm" onClick={() => appendInstructionBlock({})} > neuer Anweisungsblock </button>
 
         </div>
       </div> 
