@@ -30,18 +30,17 @@ export function CourseAdmin() {
   console.log('bc: ', object?.attributes?.instructions?.[0]?.color);
   console.log('object: ', object);
 
-    const colors = [ "error", "warning", "success", "info", "accent", "neutral", "base-100", "secondary", "primary", "neutral" ]
-
-
+  const colors = [ "error", "warning", "success", "info", "accent", "neutral", "base-100", "secondary", "primary", "neutral" ]
   return (
     <div>
+      {/* start - leave the colors, tailwind needs them to preload classes */}
       <div>
         <span className="bg-error"> </span>
         <span className="bg-error-content"> </span>
         <span className="bg-warning"> </span>
         <span className="bg-warning-content"> </span>
-        <span className="bg-succes"> </span>
-        <span className="bg-succes-content"> </span>
+        <span className="bg-success"> </span>
+        <span className="bg-success-content"> </span>
         <span className="bg-info"> </span>
         <span className="bg-info-content"> </span>
         <span className="bg-accent"> </span>
@@ -49,18 +48,17 @@ export function CourseAdmin() {
         <span className="bg-primary"> </span>
         <span className="bg-neutral"> </span>
         <span className="bg-base"> </span>
-
-
       </div>
-      <div className={`flex ${object?.attributes?.instructions?.[0]?.color} justify-between p-4`}>
-          <H1>{object?.attributes?.courseTitle}</H1>
+      {/* end - leave the colors, tailwind needs them to preload classes */}
+      <div className={`flex justify-between p-4`}>
+          <H1> {object?.attributes?.courseTitle}</H1>
           <p>{count}</p>
           {error && (<p>{error.message}</p>)}
           {isLoading && ( <p>Loading...</p>  )}
           {isLive && ( <p>Live!</p>   )}
           {isSyncing && ( <p>Syncing...</p> )}
         </div>
-      <div className="flex bg-slate-400">
+      <div className="flex">
         <div className="flex-initial">
           <Menu results={results} object={object}  setObject={setObject} />
         </div>

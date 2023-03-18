@@ -9,6 +9,7 @@ import { TextField } from "../../utilities/TextField";
 import { Instruction } from "../instruction/Instruction";
 import { VideoAddEdit } from "../video/VideoAddEdit";
 import { Question} from "../quiz/Question"
+import { H1, H2, H3 } from "../../utilities/Headline";
 // import { jsonCourseTemplate } from '../../data/jsonCourseTemplate'
 
 export const CourseForm = ({course, objectId}) => {
@@ -148,19 +149,23 @@ export const CourseForm = ({course, objectId}) => {
         </Tab.Panel>
     
         <Tab.Panel>
+          <div className="flex flex-col p-5 gap-5">
+
           {instructions.map((item, index) => {
             console.log('item: ', item.color);
             return (
               <Instruction
-                {...{ control, register }}
-                key={item.id}
-                instruction={item}
+              {...{ control, register }}
+              key={item.id}
+              instruction={item}
                 instructionIndex={index}
+                onChange={'onChange'}
                 remove={removeInstruction}
-              />
-            );
-          })}
+                />
+                );
+              })}
           <Button label="Add Instruction" onClick={() => appendInstruction({ instructionBlocks: [] })} />
+              </div>
         </Tab.Panel>
           
         <Tab.Panel>
@@ -192,11 +197,26 @@ export const CourseForm = ({course, objectId}) => {
         {/* <Button label="reset" onClick={onReset} /> */}
         <Button label="submit" onClick={handleSubmit(onSubmit)} type="submit" />
     </DivRow>
+
+    <div>
+      <div> 
+        {course.courseTitle}
+      </div>
+       {course?.instructions.map(i => {
+          let color = i.color
+          return (
+            <div className={`flex p-10 bg-${color}`}>
+              <img className="w-16 h-16" src={i.image} alt={i.instruction} />
+              <h3 className="p-5 text-4xl font-bold">{i.instruction}</h3>
+            </div>
+          )
+       })}
+    </div>
+
     <DivRow>
-    <pre id="json">
-    
-      {JSON.stringify(course, null , '\t')} 
-    </pre>
+      <pre id="json">    
+        {JSON.stringify(course, null , '\t')} 
+      </pre>
     </DivRow>
   </form>  
   );
