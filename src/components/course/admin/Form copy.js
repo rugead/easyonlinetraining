@@ -1,33 +1,45 @@
 import React, {useEffect, useState } from "react";
 import Parse from "parse";
-import { useAuth } from '../../../AuthProvider';
-import { useParams } from 'react-router-dom'
+// import { useParseQuery } from "@parse/react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Tab } from '@headlessui/react'
 import { Button } from "../../utilities/Button";
 import { Instruction } from "../instruction/Instruction";
 import { VideoAddEdit } from "../video/VideoAddEdit";
 import { Question} from "../quiz/Question"
+// import { jsonCourseTemplate } from '../../data/jsonCourseTemplate'
 
-export const CourseForm = () => {
-  const { allCourses } = useAuth();
-  const {objectId} = useParams()
-  const course = allCourses.filter(item => item.id === objectId)[0].attributes
-  const { register, control, handleSubmit, reset } = useForm({
-    defaultValues: allCourses.filter(item => item.id === objectId)[0].attributes
-  }); 
-  
-  console.log('objectId: ', objectId);
-  console.log('results: ', allCourses);
-  console.log('course: ', course);
-  
+export const CourseForm = ({course, objectId}) => {
+  // const [departmentsArray, setDepartmentsArray] = useState(['select'])
+  const { register, control, handleSubmit, reset } = useForm(
+    // {defaultValues: {jsonCourseTemplate}}
+  ); 
+    
+  // function Select({  name, ...rest }) {
+  //   return (
+  //     <select 
+  //       className="p-2 bg-gray-50 w-full text-black border border-gray-300 rounded-md"
+  //       {...register(name)} 
+  //       {...rest}
+  //     >
+  //       {departmentsArray.map(value => (
+  //         <option key={value} value={value}>
+  //           {value}
+  //         </option>
+  //       ))}
+  //     </select>
+  //   );
+  // }
+
   const onSubmit = async (values) => {
     const courseValues = values
     let Course = new Parse.Object('Course')
     
     if (objectId && course)  {
+      // console.log('update', JSON.stringify(values, null, 2));
       Course.set('objectId', objectId) 
-}
+    }
+    
     Course.set('courseTemplate', 'video')
     Course.set('courseTitle', courseValues.courseTitle)
     Course.set('courseImage', courseValues.courseImage)
@@ -35,6 +47,7 @@ export const CourseForm = () => {
     Course.set('instructions', courseValues.instructions)
     Course.set('video', courseValues.video)
     Course.set('questions', courseValues.questions)
+
     try {
       await Course.save();
       alert('success. Course saved')
@@ -46,7 +59,7 @@ export const CourseForm = () => {
       return false
     }
   };
-  
+      
   const { append: appendInstruction, remove: removeInstruction, fields: instructions } = useFieldArray({
     control: control,
     name: "instructions"
@@ -57,21 +70,44 @@ export const CourseForm = () => {
     name: "questions"
   });
   
+  // const {append: appendDepartment, remove: removeDepartment, fields: departments} = useFieldArray({
+  //   control,
+  //   name: "departments"
+  // })
+  
   useEffect(() => {
+    // async function getDepartments() {
+    //   const query = new Parse.Query("Department");
+    //   try {
+    //     const arr = await query.find();
+    //     const departmentArr = arr.map((item) => (
+    //       item.attributes.departmentName
+    //     ))
+    //     setDepartmentsArray(departmentArr)
+    //     return true
+    //   } catch (error) {
+    //     alert(`Failed to retrieve the object, with error code: ${error.message}`);
+    //     return false
+    //   }
+    // }
+    // getDepartments()
+
     if (objectId && course) {
-      // console.log('str 1: ', JSON.stringify(course, null , '\t'))
+      console.log('str 1: ', JSON.stringify(course, null , '\t'))
       reset(course)
     }
-    // if (!objectId && course) {
-    //   // console.log('str 2: ', JSON.stringify(course, null , '\t'))
-    //   reset(course)
-    // }
-  }, [objectId])
+    if (!objectId && course) {
+      console.log('str 2: ', JSON.stringify(course, null , '\t'))
+      reset(course)
+    }
+  }, [reset, course, objectId])
 
   return (
     <form>
+      {/* <Button label={edit ? 'edit eq true' : 'add eq false'} onClick={() => setEdit((edit) => !edit)} />   */}
       <Tab.Group>
       <Tab.List className="flex justify-between bg-blue-100 p- w-full">
+
         <Tab>Kursdaten</Tab>
         <Tab>Instruction</Tab>
         <Tab>Question & Answers</Tab>
@@ -84,7 +120,7 @@ export const CourseForm = () => {
             <input placeholder="Course Title" className={`input input-bordered w-full`} {...register(`courseTitle`)} type="text" />
             <input placeholder="Image http://domain.de/image.jpg"className={`input input-bordered w-full`} {...register(`courseImage`)} type="text" />     
             <select {...register("department")} className="select select-bordered">
-              <option key='0' value="" disabled>select</option>    
+              <option key='0' value="" disabled selected>select</option>    
               <option key='1' value="Verkauf">Verkauf</option>    
               <option key='2' value="Produktion">Produktion</option>    
             </select>
@@ -146,10 +182,10 @@ export const CourseForm = () => {
       <div> 
         {course.courseTitle}
       </div>
-       {course?.instructions.map((i, index) => {
+       {course?.instructions.map(i => {
           let color = i.color
           return (
-            <div key={index} className={`flex p-10 bg-${color}`}>
+            <div className={`flex p-10 bg-${color}`}>
               <img className="w-16 h-16" src={i.image} alt={i.instruction} />
               <h3 className="p-5 text-4xl font-bold">{i.instruction}</h3>
             </div>

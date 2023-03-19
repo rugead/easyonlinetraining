@@ -1,11 +1,11 @@
 import React from 'react';
-import {Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { UserLogout } from './user/UserLogout';
 import { useAuth } from './../AuthProvider';
 import { SelectField } from './utilities/SelectField';
 export const Navbar = () => {
-  const {currentUser, lang, setLang, de, en, xxx} = useAuth();
-  console.log('results: ', xxx);
+  const {currentUser, lang, setLang, de, en, allCourses} = useAuth();
+  console.log('results: ', allCourses);
   
   const onChangehandler = (ev) => {
     const { value } = ev.target;
@@ -42,11 +42,10 @@ export const Navbar = () => {
           <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
         </a>
         <ul className="p-2 bg-base-100">
-        {xxx && xxx.map((object, index) => {
+        {allCourses && allCourses.map((object, index) => {
           return (
             <li key={index}>
                <Link to={`/admin/courses/${object.id}`}> {object.attributes?.courseTitle} </Link>
-              <a >  </a>
             </li>
           )
         })}

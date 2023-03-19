@@ -33,7 +33,7 @@ export const Instruction = ({ register, control, handleSubmit, reset, trigger, s
             </li>
           </ul>
         </div>
-        <div class="flex px-4">
+        <div className="flex px-4">
             <label className="m-3">Color: </label>
             <input className={`radio radio-error m-3`} {...register(`${fieldName}.color`)} type="radio" value="error" />
             <input className={`radio radio-warning m-3`} {...register(`${fieldName}.color`)} type="radio" value="warning" />
@@ -46,8 +46,7 @@ export const Instruction = ({ register, control, handleSubmit, reset, trigger, s
         </div>
         <div className="flex gap-4 px-4">
           <input placeholder="Title" className={`input input-bordered w-full`} {...register(`${fieldName}.instruction`)} type="text" />
-          <input placeholder="Image http://domain.de/image.jpg"className={`input input-bordered w-full`} {...register(`${fieldName}.image`)} type="text" />     
-          
+          <input placeholder="Image http://domain.de/image.jpg" className={`input input-bordered w-full`} {...register(`${fieldName}.image`)} type="text" />     
         </div>
         <div className="p-4">
           {instructionBlocks.map((instructionBlock, instructionBlockIndex) => (

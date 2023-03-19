@@ -21,7 +21,7 @@ export const InstructionBlock = ({ appendInstruction, register, control, handleS
   ]);
 
   return (
-    <div className="border-2 p-6 rounded-lg">
+    <div key={instructionBlockIndex} className="border-2 p-6 rounded-lg">
       <div className="flex justify-between">
         <h2 className="font-bold ">{instructionBlockIndex + 1 }. Anweisungsblock</h2>
         <ul className="menu menu-horizontal px-1">

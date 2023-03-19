@@ -15,7 +15,7 @@ export const AuthProvider = ({children}) => {
   // const [getAllCourses] = useState(results)
   // console.log('lang: ', lang);
   // console.log('currentUser: ', currentUser);
-  const  { results: xxx  }   = useParseQuery(
+  const  { results: allCourses  } = useParseQuery(
     parseQuery, // The Parse Query to be used
     {
       enabled: true, // Enables the parse query (default: true)
@@ -48,8 +48,8 @@ export const AuthProvider = ({children}) => {
       // logIn returns the corresponding ParseUser object
       alert(
         `Success! User ${loggedInUser.attributes.firstname + ' ' + loggedInUser.attributes.lastname} has successfully signed in!`
-        );
-        console.log('loggedInUser: ', loggedInUser);
+      );
+      console.log('loggedInUser: ', loggedInUser);
       // To verify that this is in fact the current user, `current` can be used
       // const currentUser = await Parse.User.current();
       // Clear input fields
@@ -60,7 +60,7 @@ export const AuthProvider = ({children}) => {
       return true;
     } catch (error) {
       // Error can be caused by wrong parameters or lack of Internet connection
-      alert(`ssss! ${error.message}`);
+      alert(`${error.message}`);
       return false;
     }
   };
@@ -90,7 +90,7 @@ export const AuthProvider = ({children}) => {
     lang,
     de, 
     en,
-    xxx,
+    allCourses,
   }
 
 
