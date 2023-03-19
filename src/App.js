@@ -45,6 +45,7 @@ const App = () => {
             
             <Route path="admin" element={<Admin />} >
               <Route path='courses' element={<CourseAdmin />} />
+              <Route path='courses/:courseId' element={<CourseAdmin />} />
               <Route path='courses/new' element={<CourseForm />} />
               <Route path="department" element={<Department />} />
             </Route>

@@ -1,9 +1,7 @@
 import React from "react";
 
 // import {jsonCourseTemplate} from '../../data/jsonCourseTemplate'
-export const Menu = ({results, object, setObject}) => {
- 
-  console.log('object: ', object)
+export const Menu = ({results, setObject}) => {
  
   return (
     

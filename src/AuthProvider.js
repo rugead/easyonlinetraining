@@ -1,14 +1,29 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Parse } from 'parse';
+import { useParseQuery } from "@parse/react";
+
 import { de, en} from './components/lang'
 
 const AuthContext = createContext(null)
 
+const parseQuery = new Parse.Object("Course");
+
+
 export const AuthProvider = ({children}) => {
   const [currentUser, setCurrentUser] = useState(null)
   const [lang, setLang] = useState(de);
+  // const [getAllCourses] = useState(results)
   // console.log('lang: ', lang);
   // console.log('currentUser: ', currentUser);
+  const  { results: xxx  }   = useParseQuery(
+    parseQuery, // The Parse Query to be used
+    {
+      enabled: true, // Enables the parse query (default: true)
+      enableLocalDatastore: true, // Enables cache in local datastore (default: true)
+      enableLiveQuery: true // Enables live query for real-time update (default: true)
+    }
+  );
+
 
   const getCurrentUser = async function () {
     const currentUser = await Parse.User.current();
@@ -75,6 +90,7 @@ export const AuthProvider = ({children}) => {
     lang,
     de, 
     en,
+    xxx,
   }
 
 
