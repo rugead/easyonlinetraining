@@ -11,15 +11,15 @@ import { Question} from "../quiz/Question"
 
 export const CourseForm = () => {
   const { allCourses } = useAuth();
-  const {objectId} = useParams()
-  const course = allCourses.filter(item => item.id === objectId)[0].attributes
+  const { objectId } = useParams()
+  const [ course, setCourse ] = useState(allCourses.filter(item => item.id === objectId)[0].attributes)
   const { register, control, handleSubmit, reset } = useForm({
     defaultValues: allCourses.filter(item => item.id === objectId)[0].attributes
   }); 
   
-  console.log('objectId: ', objectId);
-  console.log('results: ', allCourses);
-  console.log('course: ', course);
+  // console.log('objectId: ', objectId);
+  // console.log('results: ', allCourses);
+  // console.log('course: ', course);
   
   const onSubmit = async (values) => {
     const courseValues = values
@@ -35,7 +35,9 @@ export const CourseForm = () => {
     Course.set('instructions', courseValues.instructions)
     Course.set('video', courseValues.video)
     Course.set('questions', courseValues.questions)
+    console.log('Course: ', Course.attributes);
     try {
+      setCourse(Course.attributes)
       await Course.save();
       alert('success. Course saved')
       
@@ -58,41 +60,40 @@ export const CourseForm = () => {
   });
   
   useEffect(() => {
-    if (objectId && course) {
-      // console.log('str 1: ', JSON.stringify(course, null , '\t'))
-      reset(course)
-    }
-    // if (!objectId && course) {
-    //   // console.log('str 2: ', JSON.stringify(course, null , '\t'))
-    //   reset(course)
-    // }
-  }, [objectId])
+    setCourse(allCourses.filter(item => item.id === objectId)[0].attributes)
+  }, [objectId, allCourses])
 
   return (
     <form>
+      <div className="flex py-4">
+        <h1 className="font-bold text-xl" >Kurs: {course?.courseTitle}</h1>
+      </div>
       <Tab.Group>
-      <Tab.List className="flex justify-between bg-blue-100 p- w-full">
-        <Tab>Kursdaten</Tab>
-        <Tab>Instruction</Tab>
-        <Tab>Question & Answers</Tab>
-        <Tab>Video</Tab>
+      <Tab.List className="tabs flex justify-around items-stretch py-4">
+        <Tab className="tab tab-bordered flex-1">  Kursdaten</Tab>
+        <Tab className="tab tab-bordered flex-1">  Instruction</Tab>
+        <Tab className="tab tab-bordered flex-1">  Question & Answers  </Tab>
+        <Tab className="tab tab-bordered flex-1">  Video  </Tab>
       </Tab.List>
       <Tab.Panels>
     
-        <Tab.Panel>
-          <div className="flex gap-4 px-4">
-            <input placeholder="Course Title" className={`input input-bordered w-full`} {...register(`courseTitle`)} type="text" />
-            <input placeholder="Image http://domain.de/image.jpg"className={`input input-bordered w-full`} {...register(`courseImage`)} type="text" />     
-            <select {...register("department")} className="select select-bordered">
-              <option key='0' value="" disabled>select</option>    
-              <option key='1' value="Verkauf">Verkauf</option>    
-              <option key='2' value="Produktion">Produktion</option>    
-            </select>
+        <Tab.Panel className="">
+          <div className={`border-2 rounded-xl shadow-xl`}> 
+            <h1 className="font-bold bg-base-200 text-xl p-4" >Kursname</h1>
+            <div className="flex gap-4 justify-between p-4">
+              <input placeholder="Course Title" className={`input input-bordered w-full`} {...register(`courseTitle`)} type="text" />
+              <input placeholder="Image http://domain.de/image.jpg"className={`input input-bordered w-full`} {...register(`courseImage`)} type="text" />     
+              <select {...register("department")} className="select select-bordered">
+                <option key='0' value="" disabled>select</option>    
+                <option key='1' value="Verkauf">Verkauf</option>    
+                <option key='2' value="Produktion">Produktion</option>    
+              </select>
+            </div>
           </div>
         </Tab.Panel>
     
         <Tab.Panel>
-          <div className="flex flex-col p-3">
+          <div className="flex flex-col">
             {instructions.map((item, index) => {
               return (
                 <Instruction
@@ -141,17 +142,44 @@ export const CourseForm = () => {
       </div>
     </div>
 
-
-    <div>
-      <div> 
-        {course.courseTitle}
+    <div className="divider"></div>
+    <div className="py-4 rounded-xl">
+      <div className="flex">
+        {/* <img className="w-full h-72 rounded-xl" src={course.courseImage} alt={course.courseTitle} />  */}
+       <h1 className="text-6xl font-bold p-4"> {course.courseTitle}</h1>
       </div>
        {course?.instructions.map((i, index) => {
           let color = i.color
           return (
-            <div key={index} className={`flex p-10 bg-${color}`}>
-              <img className="w-16 h-16" src={i.image} alt={i.instruction} />
-              <h3 className="p-5 text-4xl font-bold">{i.instruction}</h3>
+            <div key={index} className={`flex flex-col p-4 rounded-xl gap-4   bg-${color}`}>
+              <div className={`flex rounded-xl gap-4` }>
+                <img className="w-48 h-24 rounded-xl" src={i.image} alt={i.instruction} />
+                <h3 className="text-xl font-bold">{i.instruction}</h3>
+              </div>
+              <div className="flex flex-col gap-4 rounded-xl">
+                {i && i.instructionBlocks.map((ib, index) => {
+                  return (
+                    <div key={index} className="bg-base-100 rounded-xl py-8" >  
+                      <div className={`flex p-4 rounded-xl gap-4` }>
+                        <img className="w-24 h-24 rounded-xl" src={ib.image} alt={ib.text} />
+                        <div className="">
+                          <div className="h-24">
+                            {ib.text}
+                          </div>
+                          
+                          {ib && ib?.instructionBlockItems.map((ibi, index) => {
+                            return (
+                              <div key={index} >  
+                                  <p className="">- {ibi.text}</p>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
           )
        })}

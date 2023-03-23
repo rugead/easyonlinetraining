@@ -6,7 +6,7 @@ export const Admin = () => {
   // const { currentUser } = useAuth()
   
   return (
-    <div className="w-full"> 
+    <div className=""> 
       <Outlet />
     </div>
   );
