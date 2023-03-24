@@ -17,6 +17,7 @@ import { CourseShow } from './components/course/CourseShow';
 import { Admin } from './components/Admin';
 import { Department } from './components/department';
 import { H2 } from './components/utilities/Headline';
+import { QuestionShow } from './components/course/quiz/QuestionShow';
 
 const NoMatch = () => {
   return ( 
@@ -39,8 +40,11 @@ const App = () => {
             </Route>
             
             <Route path='courses' element={<CourseList />} >
-              <Route path='courses/:courseId' element={<CourseShow  />} />
+              <Route path='courses/:objectId' element={<CourseShow  />} />
+              <Route path='courses/:objectId/question' element={<QuestionShow  />} />
+              
               <Route path="*" element={<NoMatch />} />
+
             </Route>
             
             <Route path="admin" element={<Admin />} >
@@ -49,7 +53,7 @@ const App = () => {
               <Route path='courses/new' element={<CourseForm />} />
               <Route path="department" element={<Department />} />
             </Route>
-
+            
 
             <Route path="/signup" element={<UserRegistration />} />
             <Route path="/verify-email" element={<UserVerifyEmail />} />

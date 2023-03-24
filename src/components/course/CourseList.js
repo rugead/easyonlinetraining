@@ -1,30 +1,32 @@
-import React from "react";
-import { Parse } from "parse"
-import { useParseQuery } from "@parse/react";
-import { Link} from "react-router-dom";
-import { DivRow } from "../utilities/Div";
+import React, { useState } from "react";
+import { useAuth } from '../../AuthProvider';
+import { useParams } from 'react-router-dom'
+import { CourseShow } from "./CourseShow";
 
 export function CourseList() {
-  const parseQuery = new Parse.Object("Course");
-  const { results } = useParseQuery(parseQuery, {
-    enableLocalDatastore: true,
-    enableLiveQuery: true,
-  })
+  const { allCourses } = useAuth();
+  // const { objectId } = useParams()
   
+  // console.log('allCourses: ', allCourses);
+  const [currentCourse, setCurrentCourse] = useState()
+  // console.log('currentCourse: ', currentCourse);
   return (
     <div className="">
       <div>
-        {results && results.map((object, index) => {
-          localStorage && localStorage.setItem(object.id, JSON.stringify(object))
+        {allCourses && allCourses.map((object, index) => {
+          // localStorage && localStorage.setItem(object.id, JSON.stringify(object))
 
           return (
-            <DivRow key={index}>
-              <Link to={`/courses/${object.id}`}>
+            <div key={index}>
+              <button type="button" className="link" onClick={() => setCurrentCourse(object)}>
                 {object.attributes?.courseTitle || 'test'}
-                </Link>
-            </DivRow>
+              </button>  
+            </div>
           )
         })}
+      </div>
+      <div >
+        <CourseShow  currentCourse={currentCourse} />
       </div>
 
     </div>

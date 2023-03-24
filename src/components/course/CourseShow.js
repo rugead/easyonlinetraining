@@ -4,11 +4,13 @@ import { DivCol, DivRow } from '../utilities/Div';
 import VideoPlayer from './video/VideoPlayer'
 import InstructionShow from './instruction/InstructionShow';
 import { QuestionShow } from './quiz/QuestionShow';
-export const CourseShow = () => {
-  const {courseId} = useParams()
-  const [localStorageItem] = useState(JSON.parse(localStorage.getItem(courseId)))
-  console.log('localStorageItem: ', localStorageItem);
+
+export const CourseShow = (props) => {
+  const objectId = props?.currentCourse?.id
+  const course = props?.currentCourse?.attributes
   
+  console.log('course: ', course);
+  console.log('objectId: ', objectId);
   return ( 
     <DivCol>
       <DivRow>
@@ -17,7 +19,7 @@ export const CourseShow = () => {
       </DivRow>
   
         {/* <InstructionShow instructions={localStorageItem.instructions} /> */}
-        <QuestionShow questions={localStorageItem.questions} />
+        { (course && (course.questions.length > 0)) ? <QuestionShow questions={course?.questions} /> : 'keine Fragen hier?'   }
         {/* <VideoPlayer options={localStorageItem.video} courseid={courseId} /> */}
     
     </DivCol>
