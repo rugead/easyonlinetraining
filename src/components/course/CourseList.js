@@ -11,11 +11,10 @@ export function CourseList() {
   const [currentCourse, setCurrentCourse] = useState()
   // console.log('currentCourse: ', currentCourse);
   return (
-    <div className="">
-      <div>
+    <div className="flex">
+      <div className="w-72">
         {allCourses && allCourses.map((object, index) => {
           // localStorage && localStorage.setItem(object.id, JSON.stringify(object))
-
           return (
             <div key={index}>
               <button type="button" className="link" onClick={() => setCurrentCourse(object)}>
@@ -25,7 +24,7 @@ export function CourseList() {
           )
         })}
       </div>
-      <div >
+      <div className="w-full" >
         <CourseShow  currentCourse={currentCourse} />
       </div>
 

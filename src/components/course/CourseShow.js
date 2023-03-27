@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { DivCol, DivRow } from '../utilities/Div';
-import VideoPlayer from './video/VideoPlayer'
-import InstructionShow from './instruction/InstructionShow';
+import React from 'react';
+// import VideoPlayer from './video/VideoPlayer'
+import VideoJS from '../course/video/VideoJS'
+import { InstructionShow } from './instruction/InstructionShow';
 import { QuestionShow } from './quiz/QuestionShow';
 
 export const CourseShow = (props) => {
@@ -11,18 +10,19 @@ export const CourseShow = (props) => {
   
   console.log('course: ', course);
   console.log('objectId: ', objectId);
-  return ( 
-    <DivCol>
-      <DivRow>
-      {/* {JSON.stringify(localStorageItem.instructions, null , '\t')}  */}
 
-      </DivRow>
-  
-        {/* <InstructionShow instructions={localStorageItem.instructions} /> */}
-        { (course && (course.questions.length > 0)) ? <QuestionShow questions={course?.questions} /> : 'keine Fragen hier?'   }
-        {/* <VideoPlayer options={localStorageItem.video} courseid={courseId} /> */}
-    
-    </DivCol>
+
+
+  return ( 
+    <div>
+     <div className="flex">
+      <h1 className="text-5xl font-bold p-4">{course && course.courseTitle}</h1>
+      </div>
+      {/* { (course && (course.video)) ?       <VideoJS options={course.video} onReady={handlePlayerReady} /> : 'keine Video hier?'   } */}
+      { (course && (course.video)) ?       <VideoJS options={course.video} courseid={objectId} /> : 'keine Video hier?'   }
+      { (course && (course.instructions.length > 0)) ? <InstructionShow instructions={course?.instructions} /> : 'keine Fragen hier?'   }
+      { (course && (course.questions.length > 0)) ? <QuestionShow questions={course?.questions} /> : 'keine Fragen hier?'   }
+    </div>
   );
 }
  

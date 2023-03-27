@@ -14,7 +14,7 @@ export const CourseForm = () => {
   const { objectId } = useParams()
   const [ course, setCourse ] = useState(allCourses.filter(item => item.id === objectId)[0].attributes)
   const { register, control, handleSubmit, reset } = useForm({
-    defaultValues: allCourses.filter(item => item.id === objectId)[0].attributes
+    defaultValues: course
   }); 
   
   // console.log('objectId: ', objectId);

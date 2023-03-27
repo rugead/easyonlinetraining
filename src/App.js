@@ -39,13 +39,10 @@ const App = () => {
               <Route index element={<Home />} />
             </Route>
             
-            <Route path='courses' element={<CourseList />} >
-              <Route path='courses/:objectId' element={<CourseShow  />} />
-              <Route path='courses/:objectId/question' element={<QuestionShow  />} />
-              
-              <Route path="*" element={<NoMatch />} />
+            <Route path='courses' element={<CourseList />} />
+            {/* <Route path='courses/:objectId' element={<CourseShow  />} /> */}
+            <Route path='courses/*' element={<NoMatch />} />
 
-            </Route>
             
             <Route path="admin" element={<Admin />} >
               <Route path='courses' element={<CourseAdmin />} />

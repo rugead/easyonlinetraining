@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
 
-const VideoPlayer = ({ courseid, options }) => {
+const VideoPlayer = ({ options, courseid }) => {
   const videoRef = useRef(null)
   const playerRef = useRef(null)
 
@@ -37,11 +37,17 @@ const VideoPlayer = ({ courseid, options }) => {
       const player = playerRef.current = videojs(videoElement, options, () => {
         onReady && onReady(player);
         });
+
+        // player.current = videojs(container.current, options)
+        // return () => {
+        //   player.current.dispose()
+        // }
+    } else {
+      const player = playerRef.current;
+
+      player.autoplay(options.autoplay);
+      player.src(options.sources);
     }
-    // player.current = videojs(container.current, options)
-    // return () => {
-    //   player.current.dispose()
-    // }
   }, [options, courseid])
 
   React.useEffect(() => {

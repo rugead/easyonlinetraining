@@ -6,22 +6,41 @@ export const VideoAddEdit = ({register, control, handleSubmit, reset, trigger, s
 
   return (
     <>
-      <Checkbox type="checkbox" defaultValue={false} register={register} name={`video.autoplay`} label={`autoplay`} />
-      <Checkbox type="checkbox" defaultValue={true} register={register} name={`video.controls`} label={`controls`} />
-      <Checkbox type="checkbox" defaultValue={true} register={register} name={`video.fluid`} label={`fluid`} />
-      <Checkbox type="checkbox" defaultValue={true} register={register} name={`video.responsive`} label={`responsive`} />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.autoplay`)} type="radio" value="no" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.autoplay`)} type="radio" value="yes" />
+
+      <input className={`radio m-3`} {...register(`${fieldName}.video`)} type="radio" value="no" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video`)} type="radio" value="yes" />
+
+
+
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.playbackRateMenuButtonon`)} type="radio" value="no" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.playbackRateMenuButtonon`)} type="radio" value="yes" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.fullscreenToggle  `)} type="radio" value="no" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.fullscreenToggle  `)} type="radio" value="yes" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.progressControl.seekBar`)} type="radio" value="no" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.progressControl.seekBar`)} type="radio" value="yes" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.remainingTimeDisplay`)} type="radio" value="no" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.remainingTimeDisplay`)} type="radio" value="yes" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.captionsButton`)} type="radio" value="no" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.captionsButton`)} type="radio" value="yes" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.subtitlesButton`)} type="radio" value="no" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.subtitlesButton`)} type="radio" value="yes" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.chaptersButton`)} type="radio" value="no" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.chaptersButton`)} type="radio" value="yes" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.playToggle`)} type="radio" value="no" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controlBar.playToggle`)} type="radio" value="yes" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.responsive`)} type="radio" value="no" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.responive`)} type="radio" value="yes" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.fluid`)} type="radio" value="no" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.fluid`)} type="radio" value="yes" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controles.`)} type="radio" value="no" />
+      <input className={`radio m-3`} {...register(`${fieldName}.video.controles`)} type="radio" value="yes" />
+
       <TextField register={register} name={`video.preload`} label={`preload`} placeholder={`auto`} />
       <TextField register={register} name={`video.poster`} label={`poster`} placeholder={`https://..../poster.jpg`} />
       <TextField register={register} name={`video.sources.0.src`} label={`src`} placeholder={`https://..../film.mp4`} />
       <TextField register={register} name={`video.sources.0.type`} label={`type`} placeholder={`type`} />
-      <Checkbox type="checkbox" defaultValue={true} register={register} name={`video.controlBar.playToggle`} label={`playToggle`} />
-      <Checkbox type="checkbox" defaultValue={false} register={register} name={`video.controlBar.captionsButton`} label={`captionsButton`} />
-      <Checkbox type="checkbox" defaultValue={true} register={register} name={`video.controlBar.chaptersButton`} label={`chaptersButton`} />
-      <Checkbox type="checkbox" defaultValue={true} register={register} name={`video.controlBar.subtitlesButton`} label={`subtitlesButton`} />
-      <Checkbox type="checkbox" defaultValue={true} register={register} name={`video.controlBar.remainingTimeDisplay`} label={`remainingTime`} />
-      <Checkbox type="checkbox" defaultValue={true} register={register} name={`video.controlBar.fullscreenToggle`} label={`fullscreen`} />
-      <Checkbox type="checkbox" defaultValue={true} register={register} name={`video.controlBar.playbackRateMenuButton`} label={`playbackRateMenuButton`} />
-      <Checkbox type="checkbox" defaultValue={true} register={register} name={`video.controlBar.progressControl.seekBar`} label={`seekbar`} />
     </>
   )
 } 

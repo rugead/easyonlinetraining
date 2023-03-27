@@ -13,6 +13,7 @@ export function ScoreArea(props) {
 
 export function QuizArea(props) {
   const {question, handleClick, questionsLength, current,  abc, clickedAnswers} = props
+  console.log('questionlength: ', question.answers);
   return(
     <div className="w-full" >
         {
@@ -25,8 +26,14 @@ export function QuizArea(props) {
         ''
       }
       <Question question={question} questionsLength={questionsLength} current={current}  />
+
+
+      {question && question.answers.length > 0 ?
       <AnswerList question={question} handleClick={handleClick} clickedAnswers={clickedAnswers} abc={abc} />
-    </div>
+    :
+    'keine Antworten'
+}
+      </div>
   )
 }
 
